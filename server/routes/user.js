@@ -11,6 +11,6 @@ router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
   });
 });
 
-router.param("userId", userById);
+router.param("userId", userById); // middleware: adds user info to req.profile
 
 module.exports = router;
