@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Grid, Header } from "semantic-ui-react";
+import MainNav from "./MainNav";
 
 const Layout = ({
   title = "Title",
@@ -9,10 +10,11 @@ const Layout = ({
 }) => {
   return (
     <Container>
+      <MainNav />
       <Header>
         <h2>{title}</h2>
       </Header>
-      <Grid centered columns={1}>
+      <Grid padded centered columns={1}>
         <Grid.Row>
           <Grid.Column>{children}</Grid.Column>
         </Grid.Row>

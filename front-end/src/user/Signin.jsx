@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../core/Layout";
 import { Form, Button } from "semantic-ui-react";
-import { signin, authenticate } from "../auth";
+import { signin, authenticate, isAuthenticated } from "../auth";
 import { Link, Redirect } from "react-router-dom";
 
 const Signin = () => {
@@ -14,6 +14,7 @@ const Signin = () => {
   });
 
   const { email, password, loading, error, redirectToReferrer } = values;
+  const { user } = isAuthenticated();
 
   const handleOnChange = (name) => (event) => {
     setvalues({ ...values, error: false, [name]: event.target.value });
@@ -73,7 +74,11 @@ const Signin = () => {
 
   const redirectUser = () => {
     if (redirectToReferrer) {
-      return <Redirect to='/' />;
+      if (user && user.role === 1) {
+        return <Redirect to='/admin/dashboard' />;
+      } else {
+        return <Redirect to='/user/dashboard' />;
+      }
     }
   };
 
