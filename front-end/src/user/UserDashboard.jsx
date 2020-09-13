@@ -3,14 +3,17 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { Card, List, Item, Divider } from "semantic-ui-react";
+import { connect } from "react-redux";
 // import { getPurchaseHistory } from "./apiUser";
 // import moment from "moment";
 
-const UserDashboard = () => {
+const UserDashboard = (props) => {
   const [history, setHistory] = useState([]);
-  const {
-    user: { _id, name, email, role },
-  } = isAuthenticated();
+  //   const {
+  //     user: { _id, name, email, role },
+  //   } = isAuthenticated();
+
+  const { _id, name, email, role } = props.user;
 
   return (
     <Layout>
@@ -29,4 +32,8 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+const mapStateToProps = (user) => {
+  return user;
+};
+
+export default connect(mapStateToProps)(UserDashboard);

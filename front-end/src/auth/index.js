@@ -34,7 +34,7 @@ export const signin = (user) => {
     });
 };
 
-export const authenticate = (data, next) => {
+export const authenticate = (data, next = console.log("func not called")) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));
     next();
@@ -44,7 +44,9 @@ export const authenticate = (data, next) => {
 export const signout = (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
-    next();
+    if (next) {
+      next();
+    }
     return fetch(`${API}/signout`, {
       method: "GET",
     })

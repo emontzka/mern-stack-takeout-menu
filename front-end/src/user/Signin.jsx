@@ -3,8 +3,10 @@ import Layout from "../core/Layout";
 import { Form, Button } from "semantic-ui-react";
 import { signin, authenticate, isAuthenticated } from "../auth";
 import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchuser } from "../actions/user";
 
-const Signin = () => {
+const Signin = (props) => {
   const [values, setvalues] = useState({
     email: "",
     password: "",
@@ -23,11 +25,11 @@ const Signin = () => {
   const clickSubmit = (event) => {
     event.preventDefault();
     setvalues({ ...values, error: false, loading: true });
-    signin({ password, email }).then((data) => {
+    props.dispatch(fetchuser({ password, email })).then((data) => {
       if (data.error) {
         setvalues({ ...values, error: data.error, loading: false });
       } else {
-        authenticate(data, () => {
+        authenticate(data.token, () => {
           setvalues({
             ...values,
             redirectToReferrer: true,
@@ -37,6 +39,8 @@ const Signin = () => {
       }
     });
   };
+
+  // console.log("props ", props);
 
   const signupForm = () => (
     <Form>
@@ -84,6 +88,7 @@ const Signin = () => {
 
   return (
     <Layout title='Sign In'>
+      {/* {console.log(props)} */}
       {showError()}
       {showLoading()}
       {signupForm()}
@@ -92,4 +97,8 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+const mapStateToProps = (user) => {
+  return user;
+};
+
+export default connect(mapStateToProps)(Signin);

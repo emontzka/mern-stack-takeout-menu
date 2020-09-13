@@ -5,7 +5,6 @@ import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import PrivateRoute from "./auth/PrivateRoute";
 import UserDashboard from "./user/UserDashboard";
-// import "semantic-ui-css/semantic.min.css";
 
 const Routes = () => {
   return (
