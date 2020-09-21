@@ -4,7 +4,7 @@ import { Form, Button } from "semantic-ui-react";
 import { signin, authenticate, isAuthenticated } from "../auth";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchuser } from "../actions/user";
+import { fetchuser } from "../actions/auth";
 
 const Signin = (props) => {
   const [values, setvalues] = useState({

@@ -9,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import middleware from "./middleware";
 import reducer from "./reducers";
 
-const store = createStore(reducer, composeWithDevTools(middleware));
+export const store = createStore(reducer, composeWithDevTools(middleware));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,27 +1,32 @@
 import axios from "axios";
-import { signin, authenticate } from "../auth";
-import thunk from "redux-thunk";
+import { signin, signout, authenticate } from "../auth";
+import API from "../config";
+import { store } from "../index";
 
 export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
 
-const initialState = {};
+// export const removeUser = () => ({
+//   type: REMOVE_USER,
+// });
 
-export const addUser = (user = initialState) => ({
-  type: ADD_USER,
-  user,
-});
+// console.log("store ", store);
 
-export const removeUser = () => ({
-  type: REMOVE_USER,
-});
+export const removeUser = () => (dispatch) => {
+  console.log("func ran");
+  localStorage.removeItem("jwt");
+  store.dispatch({ type: REMOVE_USER });
+};
 
 export const fetchuser = (user) => {
   return (dispatch) => {
     return signin(user)
       .then((data) => {
         console.log("data is first ", data);
-        dispatch(addUser(data.user));
+        dispatch({
+          type: ADD_USER,
+          data,
+        });
         // authenticate(data.token, () => {
         //   console.log("testing");
         // });
@@ -33,11 +38,3 @@ export const fetchuser = (user) => {
       });
   };
 };
-
-export const removeUserThunk = () => {
-  return (dispatch) => {
-    return;
-  };
-};
-
-//thunk: signout  then dispatch removeuser.

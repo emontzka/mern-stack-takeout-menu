@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
 import { Menu } from "semantic-ui-react";
 import { NavLink, withRouter, useHistory } from "react-router-dom";
-import { signout, isAuthenticated } from "../auth";
+import { isAuthenticated } from "../auth";
+import { removeUser } from "../actions/auth";
+import { connect } from "react-redux";
 
 // const isActive = (history, path) => {
 //   if (history.location.pathname === path) {
@@ -34,19 +36,9 @@ const MainNav = () => {
         </Fragment>
       )}
 
-      {isAuthenticated() && (
-        <Menu.Item
-          onClick={() =>
-            signout(() => {
-              history.push("/");
-            })
-          }
-        >
-          Sign Out
-        </Menu.Item>
-      )}
+      {isAuthenticated() && <button onClick={removeUser()}>Sign Out</button>}
     </Menu>
   );
 };
 
-export default MainNav;
+export default connect()(MainNav);
