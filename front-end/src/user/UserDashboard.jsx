@@ -16,7 +16,7 @@ const UserDashboard = (props) => {
   // if (props.auth.user !== null) {
   //   const { _id, name, email, role } = props.auth.user;
   // }
-  const { _id, name, email, role } = props.auth.user;
+  // const { _id, name, email, role } = props.auth.user;
 
   return (
     <Layout>
@@ -43,10 +43,10 @@ const UserDashboard = (props) => {
                 <Divider />
                 {props.auth.user !== null && (
                   <List>
-                    <List.Item>{name}</List.Item>
-                    <List.Item>{email}</List.Item>
+                    <List.Item>{props.auth.user.name}</List.Item>
+                    <List.Item>{props.auth.user.email}</List.Item>
                     <List.Item>
-                      {role === 1 ? "Admin" : "Registered User"}
+                      {props.auth.user.role === 1 ? "Admin" : "Registered User"}
                     </List.Item>
                   </List>
                 )}

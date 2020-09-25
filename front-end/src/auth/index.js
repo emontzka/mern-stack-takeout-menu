@@ -1,5 +1,24 @@
 import API from "../config";
 
+export const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem("store");
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (error) {
+    return undefined;
+  }
+};
+
+export const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("store", serializedState);
+  } catch (error) {}
+};
+
 export const signup = (user) => {
   return fetch(`${API}/signup`, {
     method: "POST",
@@ -36,14 +55,15 @@ export const signin = (user) => {
 
 export const authenticate = (data, next = console.log("func not called")) => {
   if (typeof window !== "undefined") {
-    localStorage.setItem("jwt", JSON.stringify(data));
+    console.log("in authenticate ", JSON.stringify(data));
+    localStorage.setItem("store", JSON.stringify(data));
     next();
   }
 };
 
 export const signout = (next) => {
   if (typeof window !== "undefined") {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("store");
     if (next) {
       next();
     }
@@ -61,8 +81,8 @@ export const isAuthenticated = () => {
   if (typeof window == "undefined") {
     return false;
   }
-  if (localStorage.getItem("jwt")) {
-    return JSON.parse(localStorage.getItem("jwt"));
+  if (localStorage.getItem("store")) {
+    return JSON.parse(localStorage.getItem("store"));
   } else {
     return false;
   }

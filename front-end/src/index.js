@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import middleware from "./middleware";
 import reducer from "./reducers";
+import { loadState } from "./auth/index";
 
 export const store = createStore(reducer, composeWithDevTools(middleware));
 

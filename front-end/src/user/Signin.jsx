@@ -29,7 +29,7 @@ const Signin = (props) => {
       if (data.error) {
         setvalues({ ...values, error: data.error, loading: false });
       } else {
-        authenticate(data.token, () => {
+        authenticate(data, () => {
           setvalues({
             ...values,
             redirectToReferrer: true,
@@ -72,7 +72,7 @@ const Signin = (props) => {
   const showLoading = () =>
     loading && (
       <div>
-        <h2>Loading...</h2>
+        <h2>Loading....</h2>
       </div>
     );
 
