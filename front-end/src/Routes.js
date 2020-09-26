@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./core/Home";
+
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import PrivateRoute from "./auth/PrivateRoute";
 import UserDashboard from "./user/UserDashboard";
 // import { store } from ".";
 import { ADD_USER, loadUser } from "./actions/auth";
+import MainNav from "./core/MainNav";
 // import { loadState } from "./auth";
-import { store } from ".";
 
 const Routes = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  });
-
   // useEffect(() => {
   //   const localStore = window.localStorage.getItem("store");
 
@@ -33,14 +29,19 @@ const Routes = () => {
   // }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <Switch>
-        <Route path='/' exact component={Home} />
+        {/* <Route path='/' exact component={Home} /> */}
         <Route path='/signup' exact component={Signup} />
         <Route path='/signin' exact component={Signin} />
-        <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
+        <PrivateRoute
+          path='/user/dashboard'
+          exact
+          title='title test'
+          component={UserDashboard}
+        />
       </Switch>
-    </BrowserRouter>
+    </>
   );
 };
 

@@ -5,19 +5,14 @@ import { connect } from "react-redux";
 
 const PrivateRoute = ({
   component: Component,
-  auth: { loading, isAuthenticated },
+  auth: { loading, isAuthenticated, user },
   ...rest
 }) => (
   <Route
     {...rest}
     render={(props) =>
       !isAuthenticated && !loading ? (
-        <Redirect
-          to={{
-            pathname: "/signin",
-            state: { from: props.location },
-          }}
-        />
+        <Redirect to='/signin/' />
       ) : (
         <Component {...props} />
       )

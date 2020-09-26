@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Grid, Header } from "semantic-ui-react";
-import MainNav from "./MainNav";
+// import MainNav from "./MainNav";
 
 const Layout = ({
   title = "Title",
@@ -10,7 +10,7 @@ const Layout = ({
 }) => {
   return (
     <Container>
-      <MainNav />
+      {/* <MainNav /> */}
       <Header>
         <h2>{title}</h2>
       </Header>

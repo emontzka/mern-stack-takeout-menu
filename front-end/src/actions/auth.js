@@ -1,13 +1,20 @@
 import axios from "axios";
 import { signin, signout, authenticate } from "../auth";
 import API from "../config";
-import { store } from "../index";
+// import { store } from "../index";
 import { loadState } from "../auth";
 
 export const ADD_USER = "ADD_USER";
 export const REMOVE_USER = "REMOVE_USER";
 export const LOAD_USER = "LOAD_USER";
 export const AUTH_FAIL = "AUTH_FAIL";
+
+export const removeUser = () => {
+  return (dispatch) => {
+    dispatch({ type: REMOVE_USER });
+    localStorage.removeItem("store");
+  };
+};
 
 export const loadUser = () => (dispatch) => {
   console.log("running loadUser");
@@ -23,11 +30,6 @@ export const loadUser = () => (dispatch) => {
       type: AUTH_FAIL,
     });
   }
-};
-
-export const removeUser = () => (dispatch) => {
-  localStorage.removeItem("store");
-  store.dispatch({ type: REMOVE_USER });
 };
 
 export const fetchuser = (user) => {

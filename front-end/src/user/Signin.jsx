@@ -89,6 +89,7 @@ const Signin = (props) => {
   return (
     <Layout title='Sign In'>
       {/* {console.log(props)} */}
+
       {showError()}
       {showLoading()}
       {signupForm()}

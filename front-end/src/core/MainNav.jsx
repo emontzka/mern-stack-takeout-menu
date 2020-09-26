@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Menu } from "semantic-ui-react";
 import { NavLink, withRouter, useHistory } from "react-router-dom";
-import { isAuthenticated } from "../auth";
+// import { isAuthenticated } from "../auth";
 import { removeUser } from "../actions/auth";
 import { connect } from "react-redux";
 
@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 //   }
 // };
 
-const MainNav = () => {
+const MainNav = ({ isAuthenticated, removeUser }) => {
   let history = useHistory();
   return (
     <Menu>
@@ -21,11 +21,13 @@ const MainNav = () => {
         Home
       </Menu.Item>
 
-      <Menu.Item as={NavLink} to='/user/dashboard' name='dashboard'>
-        Dashboard
-      </Menu.Item>
+      {isAuthenticated && (
+        <Menu.Item as={NavLink} to='/user/dashboard' name='dashboard'>
+          Dashboard
+        </Menu.Item>
+      )}
 
-      {!isAuthenticated() && (
+      {!isAuthenticated && (
         <Fragment>
           <Menu.Item as={NavLink} to='/signin' name='signin'>
             Sign In
@@ -36,9 +38,13 @@ const MainNav = () => {
         </Fragment>
       )}
 
-      {isAuthenticated() && <button onClick={removeUser()}>Sign Out</button>}
+      {isAuthenticated && <button onClick={removeUser}>Sign Out</button>}
     </Menu>
   );
 };
 
-export default connect()(MainNav);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { removeUser })(MainNav);
