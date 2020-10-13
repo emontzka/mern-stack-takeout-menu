@@ -10,8 +10,6 @@ import { loadUser } from "../actions/auth";
 const UserDashboard = ({ isAuthenticated, user }) => {
   return !user ? null : (
     <Layout>
-      {/* {console.log("hey ", user.name)} */}
-      {/* {console.log("props ", props)} */}
       <Grid>
         <Grid.Row>
           <Grid.Column width={4}>

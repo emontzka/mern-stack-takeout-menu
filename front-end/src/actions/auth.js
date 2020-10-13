@@ -1,7 +1,6 @@
 import axios from "axios";
 import { signin, signout, authenticate } from "../auth";
 import API from "../config";
-// import { store } from "../index";
 import { loadState } from "../auth";
 
 export const ADD_USER = "ADD_USER";
@@ -17,9 +16,7 @@ export const removeUser = () => {
 };
 
 export const loadUser = () => (dispatch) => {
-  console.log("running loadUser");
   const data = loadState();
-  console.log("loaduser data ", data);
   if (data) {
     dispatch({
       type: LOAD_USER,
@@ -32,11 +29,11 @@ export const loadUser = () => (dispatch) => {
   }
 };
 
+// replace signin with axios call
 export const fetchuser = (user) => {
   return (dispatch) => {
     return signin(user)
       .then((data) => {
-        console.log("data is first here ", data);
         dispatch({
           type: ADD_USER,
           data,

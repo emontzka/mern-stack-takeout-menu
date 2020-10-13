@@ -26,6 +26,7 @@ exports.read = (req, res) => {
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
+  console.log("req is ", req);
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
@@ -33,7 +34,7 @@ exports.create = (req, res) => {
       });
     }
     // check for all fields
-    const { name, description, price, category, quantity, shipping } = fields;
+    const { name, description, price, category, quantity } = fields;
 
     if (!name || !description || !price || !category || !quantity) {
       return res.status(400).json({
